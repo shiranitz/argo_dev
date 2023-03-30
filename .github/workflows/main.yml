@@ -22,7 +22,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-directory: .
+          source-directory: dev
           destination-github-username: shiranitz  
           destination-repository-name: argo_production
           user-email: shiranitz15@gmail.com
