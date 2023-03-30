@@ -2,7 +2,7 @@
 deployment:
   name: weather-app
   image: danieliko/weather_app
-  replicaCount: 1
+  replicaCount: 2
   containerPort: 5000
 
 service:
