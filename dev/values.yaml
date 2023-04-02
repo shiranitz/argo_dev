@@ -1,7 +1,7 @@
 
 deployment:
   name: weather-app
-  image: danieliko/weather_app
+  image: tomkatzav/weather
   replicaCount: 3
   containerPort: 5000
 
