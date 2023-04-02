@@ -1,4 +1,3 @@
-
 name: CD
 
 # Controls when the workflow will run
@@ -7,25 +6,66 @@ on:
   workflow_dispatch:
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  deploy:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
+#jobs:
+#  deploy:
+#    # The type of runner that the job will run on
+#    runs-on: ubuntu-latest
+#
     # Steps represent a sequence of tasks that will be executed as part of the job
+#    steps:
+#      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#      - uses: actions/checkout@v3
+
+#      - name: Pushes to another repository
+#        uses: cpina/github-action-push-to-another-repository@main
+ #       env:
+#           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+#         with:
+#           source-directory: dev
+#           destination-github-username: shiranitz  
+#           destination-repository-name: argo_production
+#           user-email: shiranitz15@gmail.com
+#           target-branch: main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      - name: Pushes to another repository
-        uses: cpina/github-action-push-to-another-repository@main
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
-        with:
-          source-directory: dev
-          destination-github-username: shiranitz  
-          destination-repository-name: argo_production
-          user-email: shiranitz15@gmail.com
-          target-branch: main
-
-
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
+        fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
+    - name: Create local changes
+      run: |
+            sed -i 's/nodeport: 30100/nodeport: 30101/g' ./dev/values.yaml
+            cat ./dev/values.yaml
+            ls -A
+            git remote -v
+            git remote set-url origin https://github.com/shiranitz/argo_production
+            git remote -v
+            git config --global user.email "shiranitz15@gmail.com"
+            git config --global user.name "shiranitz"
+            git add ./dev/values.yaml
+            git commit -m "new values"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+         github_token: ${{ secrets.API_TOKEN_GITHUB }}
+         branch: main
+ #           git push origin main
+    
+#    - name: change remote repo to production
+#      run: |
+#            git remote -v
+#            git remote add origin https://github.com/shiranitz/argo_production
+#            git remote -v
+#    - name: Commit files
+#       run: |
+#         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+#         git config --local user.name "shiranitz15@gmail.com]"
+#         git commit -a -m "Add changes"
+#     - name: Push changes
+#       uses: ad-m/github-push-action@master
+#       with:
+#         github_token: ${{ secrets.API_TOKEN_GITHUB }}
+#         branch: main
