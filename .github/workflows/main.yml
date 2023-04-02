@@ -36,6 +36,8 @@ jobs:
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Create local changes
+      env:
+           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       run: |
             sed -i 's/nodeport: 30100/nodeport: 30101/g' ./dev/values.yaml
             cat ./dev/values.yaml
@@ -47,11 +49,12 @@ jobs:
             git config --global user.name "shiranitz"
             git add ./dev/values.yaml
             git commit -m "new values"
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-         github_token: ${{ secrets.API_TOKEN_GITHUB }}
-         branch: main
+            git push origin main 
+#    - name: Push changes
+#      uses: ad-m/github-push-action@master
+#      with:
+#         github_token: ${{ secrets.API_TOKEN_GITHUB }}
+ #        branch: main
  #           git push origin main
     
 #    - name: change remote repo to production
