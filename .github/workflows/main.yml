@@ -48,7 +48,13 @@ jobs:
             rm -rf /home/runner/work/argo_production/argo_dev
             cd /home/runner/work/argo_production
             pwd
-            git clone https://github.com/shiranitz/argo_production
+    - name: Clone GuillaumeFalourd/poc-github-actions PUBLIC repository
+      uses: GuillaumeFalourd/clone-github-repo-action@v2
+      with:
+        owner: 'shiranitz'
+        repository: 'argo_production'
+        run: |
+            pwd
             echo "cloning production"
             ls -A /home/runner/work/argo_production
             echo "ls argo_production"
