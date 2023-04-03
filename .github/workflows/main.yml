@@ -51,3 +51,5 @@ jobs:
             git status
             git commit -m .
             git push origin main
+            
+            mkdir /home/runner/work/argo_dev/argo_dev
