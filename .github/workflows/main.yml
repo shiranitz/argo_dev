@@ -46,7 +46,10 @@ jobs:
             ls -A /home/runner/work/argo_dev/argo_dev
             mv /home/runner/work/argo_dev /home/runner/work/argo_production 
             rm -rf /home/runner/work/argo_production/argo_dev
-            echo "rm argo_dev"
+            cd /home/runner/work/argo_production
+            pwd
+            git clone https://github.com/shiranitz/argo_production
+            echo "cloning production"
             ls -A /home/runner/work/argo_production
             echo "ls argo_production"
             /home/runner/work/argo_dev/argo_dev
