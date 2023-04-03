@@ -54,7 +54,8 @@ jobs:
         owner: 'shiranitz'
         repository: 'argo_production'
         access-token: ${{ secrets.API_TOKEN_GITHUB }}
-        run: |
+    - name: after clone
+      run: |
             pwd
             echo "cloning production"
             ls -A /home/runner/work/argo_production
