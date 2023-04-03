@@ -78,6 +78,7 @@ jobs:
             echo "cat befire copy"
             
             cat /home/runner/work/temp/temp-values.yaml > /home/runner/work/argo_dev/argo_production/values.yaml
+            sed -i 's/nodeport: 30100/nodeport: 30101/g' /home/runner/work/argo_dev/argo_production/values.yaml
             echo "copy"
             
             cat /home/runner/work/argo_dev/argo_production/values.yaml
