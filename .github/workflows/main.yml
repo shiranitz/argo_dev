@@ -85,8 +85,10 @@ jobs:
             
             cd /home/runner/work/argo_dev/argo_production
             pwd
+            echo " cd to prod dir"
             
-            git remote -v
+            git status
+            
             
             
             /home/runner/work/argo_dev/argo_dev
