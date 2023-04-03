@@ -77,6 +77,15 @@ jobs:
             cat /home/runner/work/argo_dev/argo_production/values.yaml
             echo "cat befire copy"
             
+            echo "----BEFORE switch port with sed-----"
+            cat /home/runner/work/temp/temp-values.yaml
+            
+            sed -i 's/nodeport: 30101/nodeport: 30100/g' /home/runner/work/temp/temp-values.yaml
+            
+            echo "----AFTER switch port with sed-----"
+            cat /home/runner/work/temp/temp-values.yaml
+            
+            
             sed -i 's/nodeport: 30101/nodeport: 30100/g' /home/runner/work/temp/temp-values.yaml
             cat /home/runner/work/temp/temp-values.yaml > /home/runner/work/argo_dev/argo_production/values.yaml
             echo "edit port and copy"
