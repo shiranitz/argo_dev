@@ -1,3 +1,8 @@
+# this workflow copy a helm values file from dev github repo (for dev anv) to production github repo(for production env)
+#the repos are thealmost the same and we edit the values file in the dev env for testing. when its done we want the same changes in production repo
+#it is made with clone the dev copy the file to another dir then clone production repo for the push
+#then chaging the content of the values file to the wanted content and pushing it back to production repo for argo to update the app 
+
 name: CD - push from dev to production
 
 # Controls when the workflow will run
@@ -32,7 +37,11 @@ jobs:
         access-token: ${{ secrets.API_TOKEN_GITHUB }}
 # mv argo_production to one diractory back
 # deleting the argo_dev local git repo
-#
+# override the content of temp-values.yaml file to values.yaml file
+# moving to argo_production local git dir of repo for pushing
+# addin deteiles about acount on config file 
+# pushing new values.yaml file to production repo
+# puting back the argo_dev dir for cleanup chackout(it is the original path of the first checkout)
     - name: after clone
       run: |  
             mv /home/runner/work/argo_dev/argo_dev/argo_production /home/runner/work/argo_dev/argo_production
