@@ -39,12 +39,14 @@ jobs:
       env:
            API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       run: |
+            pwd
+            ls
             git remote -v
             git remote set-url origin https://github.com/shiranitz/argo_production
             git remote -v
             git config --global user.email "shiranitz15@gmail.com"
             git config --global user.name "shiranitz"
-            git config --global --add safe.directory .
+            git config --global --add safe.directory . 
             git status
             sed -i 's/nodeport: 30100/nodeport: 30101/g' ./dev/values.yaml
             git status
