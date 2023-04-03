@@ -44,6 +44,8 @@ jobs:
             mkdir /home/runner/work/temp 
             mv ./dev/values.yaml /home/runner/work/temp/temp-values.yaml
             ls -A /home/runner/work/argo_dev/argo_dev
+            mv /home/runner/work/argo_dev /home/runner/work/argo_production
+            rm -rf /home/runner/work/argo_dev/argo_dev
             /home/runner/work/argo_dev/argo_dev
             git remote -v
             git remote set-url origin https://github.com/shiranitz/argo_production
