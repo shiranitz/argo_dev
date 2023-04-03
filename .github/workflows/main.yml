@@ -36,22 +36,90 @@ jobs:
         persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
         fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
     - name: Create local changes
+      env:
+           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
       run: |
-            sed -i 's/nodeport: 30100/nodeport: 30101/g' ./dev/values.yaml
-            cat ./dev/values.yaml
+            pwd
+            ls
+            mkdir /home/runner/work/temp 
+            mv ./dev/values.yaml /home/runner/work/temp/temp-values.yaml
+            ls -A /home/runner/work/argo_dev/argo_dev
+#            mv /home/runner/work/argo_dev /home/runner/work/argo_production 
+#            rm -rf /home/runner/work/argo_production/argo_dev
+#            cd /home/runner/work/argo_production
+#            pwd
+    - name: Clone GuillaumeFalourd/poc-github-actions PUBLIC repository
+      uses: GuillaumeFalourd/clone-github-repo-action@v2
+      with:
+        owner: 'shiranitz'
+        repository: 'argo_production'
+        access-token: ${{ secrets.API_TOKEN_GITHUB }}
+    - name: after clone
+      run: |
+            pwd
+            echo "cloning production"
+            
+            ls -A /home/runner/work/argo_dev/argo_dev
+            echo "ls argo_production"
+            
+            mv /home/runner/work/argo_dev/argo_dev/argo_production /home/runner/work/argo_dev/argo_production
+            echo "move production dir"
+            
+            ls -A /home/runner/work/argo_dev
+            echo "ls for /home/runner/work/argo_dev"
+            
+            rm -rf /home/runner/work/argo_dev/argo_dev
+            echo "rm for dev dir"
+            
+            ls -A /home/runner/work/argo_dev
+            echo "ls for /home/runner/work/argo_dev"
+            
+            cat /home/runner/work/argo_dev/argo_production/values.yaml
+            echo "cat befire copy"
+            
+            cat /home/runner/work/temp/temp-values.yaml > /home/runner/work/argo_dev/argo_production/values.yaml
+            echo "copy"
+            
+            cat /home/runner/work/argo_dev/argo_production/values.yaml
+            echo "cat affter copy"
+            
+            cd /home/runner/work/argo_dev/argo_production
+            pwd
             ls -A
+            echo " cd to prod dir"
+            
+            git config --global user.email "shiranitz15@gmail.com"
+            git config --global user.name "shiranitz"
+            echo "tell you how i am"
+            
+            git remote -v
+            echo "what is my remote"
+            
+            git status
+            git add values.yaml
+            git status
+            git commit -m .
+            git push origin main
+            
+            
+            /home/runner/work/argo_dev/argo_dev
             git remote -v
             git remote set-url origin https://github.com/shiranitz/argo_production
             git remote -v
             git config --global user.email "shiranitz15@gmail.com"
             git config --global user.name "shiranitz"
+            git config --global --add safe.directory . 
+            git status
+            sed -i 's/nodeport: 30100/nodeport: 30101/g' ./dev/values.yaml
+            git status
             git add ./dev/values.yaml
             git commit -m "new values"
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-         github_token: ${{ secrets.API_TOKEN_GITHUB }}
-         branch: main
+            git push https://github.com/shiranitz/argo_production --set-upstream main
+#    - name: Push changes
+#      uses: ad-m/github-push-action@master
+#      with:
+#         github_token: ${{ secrets.API_TOKEN_GITHUB }}
+ #        branch: main
  #           git push origin main
     
 #    - name: change remote repo to production
