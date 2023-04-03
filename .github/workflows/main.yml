@@ -74,6 +74,15 @@ jobs:
             ls -A /home/runner/work/argo_dev
             echo "ls for /home/runner/work/argo_dev"
             
+            cat /home/runner/work/argo_dev/argo_production/values.yaml
+            echo "cat befire copy"
+            
+            cat /home/runner/work/temp/temp-values.yaml > /home/runner/work/argo_dev/argo_production/values.yaml
+            echo "copy"
+            
+            cat /home/runner/work/argo_dev/argo_production/values.yaml
+            echo "cat affter copy"
+            
             /home/runner/work/argo_dev/argo_dev
             git remote -v
             git remote set-url origin https://github.com/shiranitz/argo_production
