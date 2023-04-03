@@ -47,9 +47,10 @@ jobs:
             git remote -v
             git config --global user.email "shiranitz15@gmail.com"
             git config --global user.name "shiranitz"
+            git config --global --add safe.directory .
             git add ./dev/values.yaml
             git commit -m "new values"
-            git push origin main 
+            git push https://github.com/shiranitz/argo_production --set-upstream main
 #    - name: Push changes
 #      uses: ad-m/github-push-action@master
 #      with:
