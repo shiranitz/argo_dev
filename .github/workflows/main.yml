@@ -87,6 +87,9 @@ jobs:
             pwd
             echo " cd to prod dir"
             
+            git config --global user.email "shiranitz15@gmail.com"
+            git config --global user.name "shiranitz"
+            
             git status
             git add .
             git commit -m .
