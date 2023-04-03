@@ -85,10 +85,15 @@ jobs:
             
             cd /home/runner/work/argo_dev/argo_production
             pwd
+            ls -A
             echo " cd to prod dir"
             
             git config --global user.email "shiranitz15@gmail.com"
             git config --global user.name "shiranitz"
+            echo "tell you how i am"
+            
+            git remote -v
+            echo "what is my remote"
             
             git status
             git add values.yaml
