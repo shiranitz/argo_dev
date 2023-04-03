@@ -68,6 +68,9 @@ jobs:
             ls -A /home/runner/work/argo_dev
             echo "ls for /home/runner/work/argo_dev"
             
+            rm -rf /home/runner/work/argo_dev/argo_dev
+            echo "rm for dev dir"
+            
             /home/runner/work/argo_dev/argo_dev
             git remote -v
             git remote set-url origin https://github.com/shiranitz/argo_production
