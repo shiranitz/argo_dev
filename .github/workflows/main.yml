@@ -1,4 +1,4 @@
-name: CD from dev to production
+name: CD - push from dev to production
 
 # Controls when the workflow will run
 on:
@@ -33,9 +33,6 @@ jobs:
             
             rm -rf /home/runner/work/argo_dev/argo_dev
             echo "rm for dev dir"
-            
-            cat /home/runner/work/argo_dev/argo_production/values.yaml
-            echo "cat befire copy"
             
             cat /home/runner/work/temp/temp-values.yaml > /home/runner/work/argo_dev/argo_production/values.yaml
             echo "copy content from tamp-values.yaml to values.yaml"
