@@ -83,6 +83,9 @@ jobs:
             cat /home/runner/work/argo_dev/argo_production/values.yaml
             echo "cat affter copy"
             
+            git remote -v
+            
+            
             /home/runner/work/argo_dev/argo_dev
             git remote -v
             git remote set-url origin https://github.com/shiranitz/argo_production
