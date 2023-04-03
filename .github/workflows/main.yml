@@ -83,6 +83,9 @@ jobs:
             cat /home/runner/work/argo_dev/argo_production/values.yaml
             echo "cat affter copy"
             
+            cd /home/runner/work/argo_dev/argo_production
+            pwd
+            
             git remote -v
             
             
