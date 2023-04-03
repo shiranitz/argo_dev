@@ -16,16 +16,23 @@ jobs:
     - name: Create local changes
       env:
            API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+# make temp dir for values.yaml file that is taken from argo_dev repo
+# mv the file to the temp repo and renaming it from "values.yaml" to "temp-values.yaml"
+# switch "nodePort" value field from 30101(of dev env) to 30100(of production env) 
       run: |
             mkdir /home/runner/work/temp 
             mv ./dev/values.yaml /home/runner/work/temp/temp-values.yaml 
             sed -i 's/nodePort: 30101/nodePort: 30100/g' /home/runner/work/temp/temp-values.yaml
+# clone argo_production repo for the push latter (using TOKEN for permision)
     - name: Clone GuillaumeFalourd/poc-github-actions PUBLIC repository
       uses: GuillaumeFalourd/clone-github-repo-action@v2
       with:
         owner: 'shiranitz'
         repository: 'argo_production'
         access-token: ${{ secrets.API_TOKEN_GITHUB }}
+# mv argo_production to one diractory back
+# deleting the argo_dev local git repo
+#
     - name: after clone
       run: |  
             mv /home/runner/work/argo_dev/argo_dev/argo_production /home/runner/work/argo_dev/argo_production
